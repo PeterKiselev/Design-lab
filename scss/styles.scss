@@ -1,0 +1,291 @@
+@import 'normalize';
+@import 'variables';
+@import 'mixins';
+@import 'menu';
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 9px;
+    scroll-behavior: smooth;
+    @media screen and (min-width: 375px) {
+        font-size: 10px;
+    }
+}
+
+body {
+    @include font($body-ff, 1.6rem, $body-color, 300, 1.5);
+    background-color: $body-bg;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 930px;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .logo {
+        fill: $secondary-color;
+        stroke: $secondary-color;
+    }
+    .no-cssgrid & {
+        display: block;
+    }
+}
+
+footer {
+    .logo {
+        fill: $body-color;
+        stroke: $body-color;
+    }
+}
+
+h1 {
+    font-size: 3.4rem;
+    @media screen and (min-width: 375px) {
+        font-size: 4.4rem;
+    }
+    @media screen and (min-width: 576px) {
+        font-size: 5.4rem;
+    }
+}
+
+h2 {
+    font-size: 2.8rem;
+    @media screen and (min-width: 576px) {
+        font-size: 3.4rem;
+    }
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+a:not([class]) {
+    text-decoration: none;
+    color: $body-color;
+    border-bottom: 1px solid $body-color;
+    @include  tr;
+    @include hover {
+        border-color: $accent-color;
+        color: $accent-color;
+    }
+}
+
+.scroll {
+    @include posA($top: auto);
+    bottom: 10px;
+    fill: $secondary-color;
+    @include tr;
+    @include hover {
+        fill: $body-color;
+    }
+    @media screen and (min-width: 576px) {
+        bottom: 40px;
+    }
+}
+
+.section {
+    text-align: center;
+    padding: 75px 0; 
+    @media screen and (min-width: 576px) {
+        padding: 115px 0;
+    }
+    &__bg {
+        @include posA;
+        min-width: 100%;
+        min-height: 100%;
+    }
+    &--bg {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: $primary-color;
+        color: $secondary-color;
+        position: relative;
+        overflow: hidden;
+    }
+    &__title {
+        text-transform: uppercase;
+        letter-spacing: 0$letter-space;
+        line-height: 1.1;
+    }
+    &__subtitle {
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+    &__content {
+        padding: 60px 30px 30px;
+        border: $border-width solid $body-color;
+        border-top: none;
+        position: relative;
+        @media screen and (min-width: 768px) {
+            padding: 60px 70px 30px;
+        }
+        @media screen and (min-width: 992px) {
+            padding: 60px 170px 30px;
+        }
+        &:before,
+        &:after {
+            content: '';
+            @include posA($top: 0, $left: 0, $delta_x: 0, $delta_y: 0);
+            width: 10%;
+            border-top: $border-width solid $body-color;
+            @media screen and (min-width: 576px) {
+                width: 27%;
+            }
+        }
+        &:after {
+            left: auto;
+            right: 0;
+        }
+    }
+    &__content &__title {
+        position: absolute;
+        @include posA($top: 0);
+        margin: 0;
+        max-height: 6.8rem;
+        overflow: hidden;
+        max-width: 74%;
+        @media screen and (min-width: 576px) {
+            max-width: 44%;
+        }
+    }
+    &--bg &__content {
+        border-color: $secondary-color;
+        &:before,
+        &:after {
+            border-color: $secondary-color;
+        }
+    }
+}
+
+.feature {
+    text-align: center;
+    margin: 50px 0;
+    & + & {
+        margin-top: 100px;
+    }
+    &__title {
+        text-transform: uppercase;
+        letter-spacing: $letter-space;
+        margin: 35px 0;
+    }
+}
+
+.btn {
+    display: inline-block;
+    background-color: $body-color;
+    color: $secondary-color;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: $letter-space;
+    padding: 20px 40px;
+    margin: 30px auto;
+    font-weight: 400;
+    border: $border-width solid $body-color;
+    @include tr;
+    @include hover {
+        background-color: $secondary-color;
+        color: $body-color;
+    }
+    @media screen and (min-width: 576px) {
+        padding: 20px 140px;
+    }
+}
+
+.copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    .logo {
+        margin-right: 20px;
+    }
+}
+
+
+$gap: 10px;
+
+.works {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: $gap;
+    grid-auto-flow: dense;
+    @media screen and (min-width: 576px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media screen and (min-width: 768px) {
+        grid-template-columns: 1fr 1.25fr 1fr;
+    }
+
+    .no-cssgrid & {
+        display: block;
+        font-size: 0;
+    }
+}
+
+.work {
+    background-color: $primary-color;
+    position: relative;
+    overflow: hidden;
+    height: 235px;
+    .no-cssgrid & {
+        display: inline-block;
+        width: 33%;
+        margin-top: .5%;
+        &:nth-of-type(3n+2) {
+            margin-left: .5%;
+            margin-right: .5%;
+        }
+    }
+    &__img {
+        min-width: 100%;
+        min-height: 100%;
+        @include posA;
+        @include tr;
+    }
+    &__name {
+        color: $secondary-color;
+        font-size: 3.4rem;
+        @include posA($top: auto, $left: 40px, $delta_x: 0, $delta_y: 0);
+        bottom: 30px;
+        right: 40px;
+        max-height: 150px;
+        overflow: hidden;
+        word-break: break-all;
+        text-transform: uppercase;
+        letter-spacing: $letter-space;
+    } 
+    @include hover {
+        .work__img {
+            @include tr;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+    &--wide {
+        @media screen and (min-width: 576px) {
+            grid-column: span 2;
+        }
+    } 
+    &--tall {
+        @media screen and (min-width: 576px) {
+            grid-row: span 2;
+            height: 235px * 2 + $gap;
+        }
+        .no-cssgrid & {
+            height: 235px;
+        }
+    }
+}
